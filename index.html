@@ -1,22 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Meme Machine</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            background: #f4f4f4; 
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
             padding: 20px;
+            margin: 0; /* Reset default body margin */
+            position: relative; /* For absolute positioning of the footer */
+            min-height: 100vh; /* Ensure body takes at least the full viewport height */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
         }
-        img { 
-            max-width: 100%; 
+        img {
+            max-width: 100%;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto; /* Add some top/bottom margin */
+            padding: 20px; /* Optional: Add padding to the container itself */
+            background-color: #fff; /* Optional: Add a background to the container */
+            border-radius: 8px; /* Optional: Round the container corners */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Optional: Add a subtle shadow to the container */
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8em;
+            color: #aaa;
+        }
+        .made-by {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 20px; /* Add some space above the "Made by" text */
         }
     </style>
     <link rel="preconnect" href="https://media.giphy.com">
@@ -26,6 +50,12 @@
         <h1> Random Meme Machine </h1>
         <div id="gif-container"></div>
     </div>
+
+    <p class="made-by">Made by TSOLER KURDIAN</p>
+
+    <footer>
+        Made by TSOLER KURDIAN
+    </footer>
 
     <script>
          const gifs = [
@@ -42,14 +72,13 @@
             "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM21raWtyaTcwaTluenpnbHZ2amsxM25zMnpmcjEyNXdnYWlocjhnYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/YnBntKOgnUSBkV7bQH/giphy.gif",
             "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM21raWtyaTcwaTluenpnbHZ2amsxM25zMnpmcjEyNXdnYWlocjhnYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/eJS4WUQ7MkNKx3qxPN/giphy.gif",
             "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM21raWtyaTcwaTluenpnbHZ2amsxM25zMnpmcjEyNXdnYWlocjhnYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XAxT6atAkwYvD2vQtJ/giphy.gif",
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM21raWtyaTcwaTluenpnbHZ2amsxM25zMnpmcjEyNXdnYWlocjhnYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/YSHzpToDH3CXJnylVk/giphy.gif".
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM21raWtyaTcwaTluenpnbHZ2amsxM25zMnpmcjEyNXdnYWlocjhnYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/YSHzpToDH3CXJnylVk/giphy.gif",
             "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM21raWtyaTcwaTluenpnbHZ2amsxM25zMnpmcjEyNXdnYWlocjhnYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/S6qkS0ETvel6EZat45/giphy.gif",
             "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM21raWtyaTcwaTluenpnbHZ2amsxM25zMnpmcjEyNXdnYWlocjhnYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/SGkufeMafyuBhIw796/giphy.gif",
             "https://media.giphy.com/media/hXOc9DJufLxpzo82zq/giphy.gif?cid=ecf05e4738z61lgl1llp0wkg8rf4vultc7llxdhqxq7ja0yw&ep=v1_gifs_search&rid=giphy.gif&ct=g",
             "https://media.giphy.com/media/kFNnvNWZYKcnvRcjpA/giphy.gif?cid=ecf05e474re0n01d1k1cuwls0g4dq885uy3f8pju263j994t&ep=v1_gifs_search&rid=giphy.gif&ct=g",
             "https://media.giphy.com/media/QsUQdPj5hCqWWhfyrO/giphy.gif?cid=ecf05e474re0n01d1k1cuwls0g4dq885uy3f8pju263j994t&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-            "https://media.giphy.com/media/MAjVWxG6pFmSaGty4Q/giphy.gif?cid=ecf05e471nph8puuoyf834cfzn98k5hrwgvwkmzfwozfbzb4&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-  
+            "https://media.giphy.com/media/MAjVWxG6pFmSaGty4Q/giphy.gif?cid=ecf05e471nph8puuoyf834cfzn98k5hrwgvwkmzfwozfbzb4&ep=v1_gifs_search&rid=giphy.gif&ct=g"
             // Add more GIF URLs here
         ];
 
@@ -59,14 +88,6 @@
 
         // Optional: Track scans
         fetch("https://api.countapi.xyz/hit/gif-qr-shirt/visits");
-    </head>
-<body>
-  <p style="font-size: 0.9em; color: #888;">Made by TSOLER KURDIAN</p>
-</body>
-        <body>
-  <footer style="position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.8em; color: #aaa;">
-    Made by TSOLER KURDIAN
-  </footer>
+    </script>
 </body>
 </html>
-
